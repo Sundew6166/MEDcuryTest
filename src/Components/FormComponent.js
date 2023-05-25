@@ -40,17 +40,17 @@ const FormComponent = (props) => {
 
     useEffect(() => {
         const fetch = async () => {
-          try {
-            const {data} = await axios.get(`http://localhost:3000/patients/?tel=${tel}&pin=${pin}`);
-            if (data.length > 0) {
-                setDisable(false)
+            try {
+                const { data } = await axios.get(`http://localhost:3000/patients/?tel=${tel}&pin=${pin}`);
+                if (data.length > 0) {
+                    setDisable(false)
+                }
+            } catch (err) {
+                console.error(err);
             }
-          } catch (err) {
-            console.error(err);
-          }
         };
         fetch();
-      }, [tel, pin]);
+    }, [tel, pin]);
 
     return (
         <div style={{ textAlign: 'left' }}>
@@ -61,13 +61,13 @@ const FormComponent = (props) => {
                         <input type="text" required placeholder="เบอร์ผู้ไข้" onChange={inputTel} value={tel} />
                     </div>
 
-                    <div style={{  marginLeft:10 }}>
+                    <div style={{ marginLeft: 10 }}>
                         <label>PIN</label>
                         <input type="password" required placeholder="PIN" onChange={inputPin} value={pin} />
                     </div>
 
                     <div>
-                        <Button disabled={disable} style={{ marginTop: 55, marginLeft:10 }} type="submit" variant="success">นัดหมอ</Button>
+                        <Button disabled={disable} style={{ marginTop: 55, marginLeft: 10 }} type="submit" variant="success">นัดหมอ</Button>
                     </div>
                 </div>
             </form>
