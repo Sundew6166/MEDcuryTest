@@ -1,11 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './FormComponent.css'
 import { v4 as uuidv4 } from 'uuid'
 import Button from 'react-bootstrap/Button';
+import axios from "axios";
+import { Alert } from 'react-bootstrap';
 
 const FormComponent = (props) => {
     const [tel, setTel] = useState('')
     const [pin, setPin] = useState('')
+    const [disable, setDisable] = useState(true)
 
     const inputTel = (event) => {
         setTel(event.target.value)
@@ -29,11 +32,26 @@ const FormComponent = (props) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(itemData)
         };
-        fetch(`http://localhost:3000/bookingList?tel=${tel}&pin=${pin}`, requestOptions)
+        fetch(`http://localhost:3000/bookingList`, requestOptions)
             .then(response => response.json())
         setTel('')
         setPin('')
     }
+
+    useEffect(() => {
+        const fetch = async () => {
+          try {
+            const {data} = await axios.get(`http://localhost:3000/patients/?tel=${tel}&pin=${pin}`);
+            if (data.length > 0) {
+                setDisable(false)
+            }
+          } catch (err) {
+            console.error(err);
+          }
+        };
+        fetch();
+      }, [tel, pin]);
+
     return (
         <div style={{ textAlign: 'left' }}>
             <form onSubmit={saveItem}>
@@ -49,7 +67,7 @@ const FormComponent = (props) => {
                     </div>
 
                     <div>
-                        <Button style={{ marginTop: 55, marginLeft:10 }} type="submit" variant="success">จองนัด</Button>
+                        <Button disabled={disable} style={{ marginTop: 55, marginLeft:10 }} type="submit" variant="success">นัดหมอ</Button>
                     </div>
                 </div>
             </form>

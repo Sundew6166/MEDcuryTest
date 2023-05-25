@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const ItemComponent = (props) => {
     const { id, date, time, ID_doctor, status } = props
@@ -13,15 +14,16 @@ const ItemComponent = (props) => {
             .then(response => response.json())
     }
 
-    const Booking = () => {
-        const requestOptions = {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({date: date, time: time, ID_doctor: ID_doctor, status: false, softDel: false })
-        };
-        fetch('http://localhost:3000/bookingList/' + id, requestOptions)
-            .then(response => response.json())
-    }
+    // const Booking = () => {
+    //     const requestOptions = {
+    //         method: 'PUT',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({date: date, time: time, ID_doctor: ID_doctor, status: false, softDel: false })
+    //     };
+    //     fetch('http://localhost:3000/bookingList/' + id, requestOptions)
+    //         .then(response => response.json())
+    // }
+    
     return (
         <tr key={id}>
             <td>{date}</td>
@@ -32,7 +34,9 @@ const ItemComponent = (props) => {
                     (() => {
                         if (status) {
                             return (
-                                <Button onClick={Booking} type="submit" variant="outline-success">ว่าง</Button>
+                                <Link style={{ textDecoration: 'none' }} to='/insert' >
+                                <Button type="submit" variant="outline-success">ว่าง</Button>
+                                </Link>
                             )
                         } else {
                             return (

@@ -23,7 +23,7 @@ function App() {
           </ul>
           <ul>
             <Link style={{ textDecoration: 'none' }} to='/insert' >
-              <Button variant="outline-dark">จองคิว</Button>
+              <Button variant="outline-dark">นัดหมอ</Button>
             </Link>
           </ul>
 
