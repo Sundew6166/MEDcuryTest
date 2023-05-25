@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# Home Test
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## ติดตั้ง
 
-## Available Scripts
+ดาวน์โหลด [Node.js](https://nodejs.org/en).
 
-In the project directory, you can run:
+```bash
+git clone https://github.com/Sundew6166/MEDcuryTest.git
 
-### `npm start`
+npm install
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+npm install react-bootstrap bootstrap
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+npm install json-server
 
-### `npm test`
+npm install axios
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+npm i react-router-dom
+```
+### RUN
 
-### `npm run build`
+```bash
+cd MEDcuryTest
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+npx json-server --watch db.json
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+npm start
+```
+#### การทำงาน
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- หน้าปฏิทินการทำงาน แสดง slot การทํางานที่ว่าง และที่ถูกจอง สามารถเลือก option การแสดงได้ดังนี้
+  - เลือก dropdown ของหมอที่ต้องการดู
+  - เลือกวันเดือนปีเริ่มต้น และสิ้นสุดได้ แต่ dropdown จะต้องเป็น value ทั้งหมด เท่านั้น 
+  - ปุ่มรีเฟรชรายการจะเปลี่ยนเป็นแสดงรายการทั้งหมด
+  - ปุ่มในช่องสถานะที่เป็นปุ่มสีแดง หรือปุ่ม "ไม่ว่าง" สามารถกดเพื่อยกเลิกรายการนัดได้
+  - ปุ่มในช่องสถานะที่เป็นปุ่มสีเขียว หรือปุ่ม "ว่าง" สามารถกดเพื่อไปยังหน้านัดหมอ
+- หน้ารายการนัดคนไข้ ต้องกรอก ID ของหมอเพื่อเรียกดูรายการนัดทั้งหมด
+- หน้านัดหมอ คนไข้จะต้องกรอกเบอร์โทรศัพท์ และ PIN ที่มีในฐานข้อมูลเพื่อทำการนัดหมอ
 
-### `npm run eject`
+##### คำสั่งการเรียกข้อมูล
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+GET ข้อมูลการทำงานที่ว่าง และไม่ว่าง
+```bash
+http://localhost:3000/bookingList
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+GET ข้อมูลของหมอ
+```bash
+http://localhost:3000/doctors
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+GET ข้อมูลของคนไข้
+```bash
+http://localhost:3000/patients
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+GET ข้อมูลของคนไข้ และส่ง params ที่เป็นเบอร์โทรศัพท์ และ PIN
+```bash
+http://localhost:3000/patients/?tel=0810000001&pin=111111
+```
 
-## Learn More
+GET ข้อมูลของหมอแต่ละคน และส่ง params ที่เป็น id หมอ และสถานะที่ถูกนัดแล้ว
+```bash
+http://localhost:3000/bookingList/?ID_doctor=001&status=false
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+POST บันทึกข้อมูลการนัดหมอ
+```bash
+http://localhost:3000/bookingList
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+PUT ยกเลิกข้อมูลการนัดหมอ
+```bash
+http://localhost:3000/bookingList/8
+```
 
-### Code Splitting
+###### อธิบายเพิ่มเติม
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+> ไม่มีการเชื่อม Relation ของข้อมูล
 
-### Analyzing the Bundle Size
+> จากโจทย์ที่กำหนดการทำงานของ API ข้อที่ 1 ผู้จัดทำเห็นว่าข้อมูลได้ถูกเรียกมาแสดงทั้งหมดอยู่แล้วจึงไม่ได้ทำตามที่กำหนด แต่เปลี่ยนเป็นการกรองข้อมูลที่เรียกมาตั้งแต่ต้นตามที่ผู้ใช้ได้เลือกวันเริ่มต้น และสิ้นสุดแทน
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+> จากโจทย์ที่กำหนดการทำงานของ API ข้อที่ 2 การนัดหมอนั้นเป็นเพียงการบันทึกข้อมูลธรรมดา ไม่มีการเลือกหมอ วัน เวลา ผู้จัดทำได้กำหนดไว้ทั้งหมด แต่ผู้จัดทำได้ทำการส่งเบอร์โทร และ PIN เพื่อไป Get ข้อมูลคนไข้กลับมา หากมีข้อมูลจึงจะทำการกดปุ่ม "นัดหมอ" ได้
 
-### Making a Progressive Web App
+> จากโจทย์ที่กำหนดการทำงานของ API ข้อที่ 3 การยกเลิกนัดผู้จัดทำไม่ได้ทำการตรวจสอบใดๆ ดังนั้นไม่ว่าใครก็สามารถยกเลิกนัดของผู้อื่นได้ และผู้จัดทำกำหนดการยกเลิกเป็นการเปลี่ยนสถานะไม่ให้แสดงเท่านั้น ไม่ได้เป็นการลบข้อมูล
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> จากโจทย์ที่กำหนดการทำงานของ API ข้อที่ 4 การเรียกดูสรุปการจองของหมอแต่ละคน ผู้จัดทำได้กำหนดการเรียกข้อมูลโดยส่ง ID ของหมอ และ สถานะการจองที่ไม่ว่าง หรือ เรียกข้อมูลการนัดหมอโดยเฉพาะ
