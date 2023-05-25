@@ -1,0 +1,120 @@
+{
+  "doctors": [
+    {
+      "id": "001",
+      "workingDay": "0101010",
+      "name": "ก",
+      "startDate": "08:00",
+      "endDate": "12:00",
+      "hour": 60
+    },
+    {
+      "id": "002",
+      "workingDay": "0010101",
+      "name": "ข",
+      "startDate": "13:00",
+      "endDate": "15:00",
+      "hour": 30
+    }
+  ],
+  "patients": [
+    {
+      "id": 1,
+      "name": "นายกร",
+      "tel": "0810000001",
+      "pin": "111111"
+    },
+    {
+      "id": 2,
+      "name": "นายนก",
+      "tel": "0810000002",
+      "pin": "222222"
+    },
+    {
+      "id": 3,
+      "name": "นายตูน",
+      "tel": "0810000003",
+      "pin": "333333"
+    },
+    {
+      "id": 4,
+      "name": "นายหมาย",
+      "tel": "0810000004",
+      "pin": "444444"
+    }
+  ],
+  "bookingList": [
+    {
+      "date": "6/3/2023",
+      "time": "08:00:00",
+      "ID_doctor": "001",
+      "status": true,
+      "id": 1,
+      "softDel": false
+    },
+    {
+      "date": "6/4/2023",
+      "time": "12:00:00",
+      "ID_doctor": "002",
+      "status": true,
+      "id": 2,
+      "softDel": false
+    },
+    {
+      "date": "6/5/2023",
+      "time": "08:00:00",
+      "ID_doctor": "001",
+      "status": false,
+      "id": 3,
+      "softDel": false
+    },
+    {
+      "date": "6/6/2023",
+      "time": "13:00:00",
+      "ID_doctor": "002",
+      "status": false,
+      "id": 4,
+      "softDel": false
+    },
+    {
+      "date": "6/7/2023",
+      "time": "11:00:00",
+      "ID_doctor": "001",
+      "status": true,
+      "id": 5,
+      "softDel": false
+    },
+    {
+      "date": "6/8/2023",
+      "time": "13:00:00",
+      "ID_doctor": "002",
+      "status": false,
+      "id": 6,
+      "softDel": false
+    },
+    {
+      "date": "6/9/2023",
+      "time": "11:00:00",
+      "ID_doctor": "001",
+      "status": true,
+      "id": 7,
+      "softDel": false
+    },
+    {
+      "date": "6/10/2023",
+      "time": "14:00:00",
+      "ID_doctor": "002",
+      "status": true,
+      "softDel": false,
+      "id": 8
+    },
+    {
+      "id": "e2645715-f6e5-4aab-af3a-adb5305e945a",
+      "ID_doctor": "001",
+      "date": "5/25/2023",
+      "status": false,
+      "softDel": false,
+      "time": "11:05:58 PM"
+    }
+  ]
+}
